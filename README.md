@@ -1,5 +1,5 @@
 # canvas-game
-Lista technologii jakich użyto:
+Technologie jakie użyto:
 - JavaScript
 - HTML
 - CSS
