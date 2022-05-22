@@ -226,7 +226,7 @@ function animate() {
                     })
                     projectiles.splice(projectileIndex, 1);
                 } else {
-                    // usuwanie przeciwników jeśli są za mali
+                    // usuwanie przeciwników jeśli są mniejsi
                     score += 100;
                     scoreEl.innerHTML = score;
                     enemies.splice(index, 1);
