@@ -1,2 +1,6 @@
 # canvas-game
-Gra defensywna zrobiona w JavaScript
+Lista technologii jakich użyto:
+- JavaScript
+- HTML
+- CSS
+- GSAP
