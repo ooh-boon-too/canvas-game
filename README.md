@@ -1,5 +1,6 @@
 # canvas-game
-Technologie jakie użyto:
+A simple canvas survival game written to learn JavaScript
+Made with:
 - JavaScript
 - HTML
 - CSS
