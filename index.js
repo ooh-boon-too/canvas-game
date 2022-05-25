@@ -182,7 +182,7 @@ function animate() {
     // kolor canvasu
     c.fillStyle = 'rgba(0, 0, 0, 0.2)';
     c.fillRect(0, 0, canvas.width, canvas.height);
-    
+
     player.update();
 
     for (let index = particles.length - 1; index >= 0; index--) {
@@ -254,7 +254,7 @@ function animate() {
                     })
                     projectiles.splice(projectileIndex, 1);
                 } else {
-                    // usuwanie przeciwników jeśli są za mali
+                    // usuwanie przeciwników jeśli są mniejsi
                     score += 100;
                     scoreEl.innerHTML = score;
                     enemies.splice(index, 1);
