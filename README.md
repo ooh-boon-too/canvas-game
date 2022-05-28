@@ -1,6 +1,2 @@
 # canvas-game
-Technologie jakie użyto:
-- JavaScript
-- HTML
-- CSS
-- GSAP
+A simple canvas survival game written to learn JavaScript
