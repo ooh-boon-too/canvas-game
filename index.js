@@ -66,7 +66,7 @@ class Projectile {
     draw() {
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        c.fillStyle = this.color;
+        c.fillStyle = 'rgba(255,0,0,1)';
         c.fill();
     }
 
@@ -174,16 +174,15 @@ function spawnEnemies() {
             y: Math.sin(angle) * 1.6
         }
         enemies.push(new Enemy(x, y, radius, color, velocity));
-    }, 1000)
+    }, 500)
 }
 
 function animate() {
+    player.update();
     animationId = requestAnimationFrame(animate);
     // kolor canvasu
     c.fillStyle = 'rgba(0, 0, 0, 0.2)';
     c.fillRect(0, 0, canvas.width, canvas.height);
-
-    player.update();
 
     for (let index = particles.length - 1; index >= 0; index--) {
         const particle = particles[index];
