@@ -23,21 +23,19 @@ let particles = [];
 let animationId;
 let intervalId;
 let score = 0;
-let powerUp = new PowerUp({
-	position: {
-		x: 100,
-		y: 100
-	}
-});
+let powerUps = [];
+let frames = 0;
 
 function init() {
 	player = new Player(x, y, 12, 'white');
 	projectiles = [];
 	enemies = [];
 	particles = [];
+	powerUps = [];
 	animationId;
 	score = 0;
 	scoreEl.innerHTML = 0;
+	frames = 0;
 }
 
 function spawnEnemies() {
@@ -64,14 +62,66 @@ function spawnEnemies() {
 	}, 500);
 }
 
+function spawnPowerUps() {
+	spawnPowerUpsId = setInterval(() => {
+		powerUps.push(
+			new PowerUp({
+				position: {
+					x: -30,
+					y: Math.random() * canvas.height
+				},
+				velocity: {
+					x: Math.random() + 2,
+					y: 0
+				}
+			})
+		);
+	}, 10000);
+}
+
 function animate() {
 	animationId = requestAnimationFrame(animate);
 	// kolor canvasu
 	c.fillStyle = 'rgba(0, 0, 0, 0.2)';
 	c.fillRect(0, 0, canvas.width, canvas.height);
+	frames++;
 
 	player.update();
-	powerUp.update();
+
+	for (let i = powerUps.length - 1; i >= 0; i--) {
+		const powerUp = powerUps[i];
+
+		if (powerUp.position.x > canvas.width) {
+			powerUps.splice(i, 1);
+		} else {
+			powerUp.update();
+		}
+
+		const dist = Math.hypot(player.x - powerUp.position.x, player.y - powerUp.position.y);
+		// gain powerup
+		if (dist < powerUp.image.height / 2 + player.radius) {
+			powerUps.splice(i, 1);
+			player.powerUp = 'MachineGun';
+			player.color = 'yellow';
+			setTimeout(() => {
+				player.powerUp = null;
+				player.color = 'white';
+			}, 5000);
+		}
+	}
+
+	// machine gun animation / imlementaion
+	if (player.powerUp === 'MachineGun') {
+		const angle = Math.atan2(mouse.position.y - player.y, mouse.position.x - player.x);
+		const velocity = {
+			x: Math.cos(angle) * 5,
+			y: Math.sin(angle) * 5
+		};
+
+		if (frames % 4 === 0) {
+			projectiles.push(new Projectile(player.x, player.y, 5, 'yellow', velocity));
+		}
+	}
 
 	for (let index = particles.length - 1; index >= 0; index--) {
 		const particle = particles[index];
@@ -173,10 +223,23 @@ addEventListener('click', (event) => {
 	projectiles.push(new Projectile(player.x, player.y, 5, 'white', velocity));
 });
 
+const mouse = {
+	position: {
+		x: 0,
+		y: 0
+	}
+};
+
+addEventListener('mousemove', (event) => {
+	mouse.position.x = event.clientX;
+	mouse.position.y = event.clientY;
+});
+
 buttonEl.addEventListener('click', () => {
 	init();
 	animate();
 	spawnEnemies();
+	spawnPowerUps();
 	gsap.to('#divScoreEl', {
 		opacity: 1,
 		duration: 0.4
@@ -196,6 +259,7 @@ startButtonEl.addEventListener('click', () => {
 	init();
 	animate();
 	spawnEnemies();
+	spawnPowerUps();
 	gsap.to('#divScoreEl', {
 		opacity: 1,
 		duration: 0.4

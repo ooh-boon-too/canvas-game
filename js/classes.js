@@ -8,6 +8,7 @@ class Player {
 			x: 0,
 			y: 0
 		};
+		this.powerUp;
 	}
 
 	draw() {
@@ -52,7 +53,6 @@ class Projectile {
 	draw() {
 		c.beginPath();
 		c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-		c.fillStyle = 'rgba(255,255,255,1)';
 		c.fill();
 	}
 
@@ -175,9 +175,10 @@ class PowerUp {
 		this.alpha = 1;
 		gsap.to(this, {
 			alpha: 0,
-			duration: 0.3,
+			duration: 0.6,
 			repeat: -1,
-			yoyo: true
+			yoyo: true,
+			ease: 'linear'
 		});
 		this.radians = 0;
 	}
@@ -188,12 +189,13 @@ class PowerUp {
 		c.translate(this.position.x + this.image.width / 2, this.position.y + this.image.height / 2);
 		c.rotate(this.radians);
 		c.translate(-this.position.x - this.image.width / 2, -this.position.y - this.image.height / 2);
-		c.drawImage(this.image, 100, 100);
+		c.drawImage(this.image, this.position.x, this.position.y);
 		c.restore();
 	}
 
 	update() {
 		this.draw();
 		this.radians += 0.01;
+		this.position.x += this.velocity.x;
 	}
 }
