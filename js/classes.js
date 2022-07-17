@@ -167,8 +167,8 @@ class Particle {
 }
 
 class PowerUp {
-	constructor({ postion = { x: 0, y: 0 }, velocity }) {
-		this.postion = postion;
+	constructor({ position = { x: 0, y: 0 }, velocity }) {
+		this.position = position;
 		this.velocity = velocity;
 		this.image = new Image();
 		this.image.src = './img/lightningBolt.png';
@@ -185,9 +185,9 @@ class PowerUp {
 	draw() {
 		c.save();
 		c.globalAlpha = this.alpha;
-		c.translate(this.postion.x + this.image.width / 2, this.postion.y + this.image.height / 2);
+		c.translate(this.position.x + this.image.width / 2, this.position.y + this.image.height / 2);
 		c.rotate(this.radians);
-		c.translate(-this.postion.x - this.image.width / 2, -this.postion.y - this.image.height / 2);
+		c.translate(-this.position.x - this.image.width / 2, -this.position.y - this.image.height / 2);
 		c.drawImage(this.image, 100, 100);
 		c.restore();
 	}
