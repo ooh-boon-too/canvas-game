@@ -7,13 +7,8 @@ Survival game based on [Christopher Lis](https://www.youtube.com/c/ChrisCourses)
 - HTML
 - CSS
 - JavaScript
-- GSAP
-- MDN
+- [GSAP](https://greensock.com/gsap/)
+- [MDN](https://developer.mozilla.org/en-US/)
 - Udemy
 ## New things i learned
-- querySelector
-- Arrow function
-- constructor
-- setInterval()
-- GSAP animation
-- EventListener
+I learnd how to use querySelectors, Arrow function, constructor, setInterval(), GSAP animation, EventListeners and more.
